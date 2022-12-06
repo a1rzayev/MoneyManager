@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="MoneyManager.View.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MoneyManager.View"
+             xmlns:viewmodel="clr-namespace:MoneyManager.ViewModel"
+             mc:Ignorable="d"  
+             d:DataContext="{d:DesignInstance Type=viewmodel:HomeViewModel}"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"    
+             d:DesignHeight="480" d:DesignWidth="640">
+    <Grid Background="black">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TabControl Style="{StaticResource MaterialDesignNavigatilRailTabControl}" Grid.Column="0">
+
+            <TabItem Style="{StaticResource MaterialDesignNavigationRailTabItem}" Header="Edit">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition Height="6*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2" Content="Balance" HorizontalAlignment="center" VerticalAlignment="Center" FontSize="48" Style="{StaticResource MaterialDesignLabel}"/>
+                    <Label Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Content="{Binding Balance}" HorizontalAlignment="Center" FontSize="24" Style="{StaticResource MaterialDesignLabel}"/>
+                    <!--<TextBox Text="{Binding IncomeSumm, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Grid.Row="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}" MaxLength="20"/>
+                    <TextBox Text="{Binding SpendSumm, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}" MaxLength="20"/>
+
+
+                    <ComboBox ItemsSource="{Binding IncomeCategories}" SelectedIndex="{Binding SelectedIncomePayTypeIndex, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding ChosenIncomeCategory}" Grid.Column="0" Grid.Row="3" Style="{StaticResource MaterialDesignComboBox}"/>
+                    <ComboBox ItemsSource="{Binding SpendCategories}" SelectedIndex="{Binding SelectedSpendPayTypeIndex, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding ChosenSpendCategory}" Grid.Column="1" Grid.Row="3" Style="{StaticResource MaterialDesignComboBox}"/>
+
+
+                    <ComboBox Grid.Column="0" Grid.Row="4" ItemsSource="{Binding PayWays}" SelectedIndex="{Binding SelectedIncomeIndex, UpdateSourceTrigger=PropertyChanged}"/>
+                    <ComboBox Grid.Column="1" Grid.Row="4" ItemsSource="{Binding PayWays}" SelectedIndex="{Binding SelectedSpendIndex, UpdateSourceTrigger=PropertyChanged}"/>-->
+
+                    <Button Style="{StaticResource MaterialDesignOutlinedButton}" Command="{Binding Earn}" Grid.Column="0" Grid.Row="6" Content="+" FontSize="24"/>
+                    <Button Style="{StaticResource MaterialDesignOutlinedButton}" Command="{Binding Spend}" Grid.Column="1" Grid.Row="6" Content="-" FontSize="24"/>
+                </Grid>
+            </TabItem>
+
+            <TabItem Style="{StaticResource MaterialDesignNavigationRailTabItem}" Header="Statistics">
+                <TabControl Style="{StaticResource MaterialDesignNavigatilRailTabControl}" >
+                    <TabItem Header="Spend" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                        <!--<chartingToolkit:Chart Margin="0" Title="Chart Title" DataContext="{Binding PieCollection}">
+                            <chartingToolkit:PieSeries ItemsSource="{Binding}" DependentValuePath="Share" IndependentValuePath="Name">
+                            </chartingToolkit:PieSeries>
+                        </chartingToolkit:Chart>-->
+                        <!--<xctk:Pie DataContext="{Binding SpendCategoriesPie, UpdateSourceTrigger=PropertyChanged}" >
+                             
+                        </xctk:Pie>-->
+                        <ListBox ItemsSource="{Binding SpendCategoriesStatistics, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource MaterialDesignCardsListBox}"/>
+                    </TabItem>
+                    <TabItem Header="Income" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+
+                        <ListBox ItemsSource="{Binding IncomeCategoriesStatistics, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource MaterialDesignCardsListBox}"/>
+                        <!--<xctk:Pie DataContext="{Binding IncomeCategoriesPie, UpdateSourceTrigger=PropertyChanged}" >
+
+                        </xctk:Pie>-->
+                    </TabItem>
+
+                    <TabItem Header="History" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                        <ListBox ItemsSource="{Binding History, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource MaterialDesignCardsListBox}"/>
+                    </TabItem>
+                </TabControl>
+            </TabItem>
+        </TabControl>
+        <StackPanel Grid.Column="1" Background="LightBlue">
+            <Button Background="blue" MinHeight="50" MinWidth="50" Style="{StaticResource MaterialDesignIconButton}" Command="{Binding GotoSettings}">
+                <Image Source="{Binding PhotoSource, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Button>
+            <Button Background="blue" Content="exit"  FontSize="16" Command="{Binding Exit}" VerticalAlignment="Center"/>
+            <Label Content="Card/Category" FontSize="7" VerticalAlignment="Center"/>
+            <Button Background="blue" Content="Add" FontSize="8" Command="{Binding Add}" VerticalAlignment="Center"/>
+            <Button Background="blue" Content="Remove" FontSize="7" Command="{Binding Remove}" VerticalAlignment="Center"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

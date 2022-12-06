@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="MoneyManager.View.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MoneyManager.View"
+             xmlns:viewmodel="clr-namespace:MoneyManager.ViewModel"
+             mc:Ignorable="d"  
+             xmlns:helpers="clr-namespace:MoneyManager.Helpers"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             xmlns:classes="clr-namespace:MoneyManager.Classes"
+             d:DataContext="{d:DesignInstance Type=viewmodel:SettingsViewModel}"
+             d:DesignHeight="480" d:DesignWidth="640">
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Label Content="Name" Grid.Row="1" Grid.Column="0" FontSize="11" HorizontalAlignment="Right" VerticalAlignment="bottom"/>
+            <TextBox Text="{Binding Name}" MaxLength="20" Margin="0 0" Grid.Row="1" Grid.Column="1" materialDesign:HintAssist.Hint="Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Foreground="Black" FontFamily="Champagne &amp; Limousines" VerticalAlignment="Bottom"/>
+
+            <Label Content="Surname" Grid.Row="1" Grid.Column="2" FontSize="11" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+            <TextBox Text="{Binding Surname}" MaxLength="20" Margin="0 0" Grid.Row="1" Grid.Column="3" materialDesign:HintAssist.Hint="Surname" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Foreground="Black" FontFamily="Champagne &amp; Limousines" VerticalAlignment="Bottom"/>
+
+            <Label Content="Mail" Grid.Row="2" Grid.Column="0" FontSize="11" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+            <TextBox Text="{Binding Mail}" MaxLength="50" Margin="0 0" Grid.Row="2" Grid.Column="1" materialDesign:HintAssist.Hint="Name" Grid.ColumnSpan="3" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Foreground="Black" FontFamily="Champagne &amp; Limousines" VerticalAlignment="Bottom"/>
+
+            <Label Content="Birth" Grid.Row="3" Grid.Column="0" FontSize="11" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+            <DatePicker SelectedDate="{Binding BirthDate}" Grid.Row="3" Grid.Column="1" VerticalAlignment="Bottom"/>
+            
+            <Label Content="Photo" Grid.Row="3" Grid.Column="2" FontSize="11" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+            <Button Content="{Binding ImageButtonText}" Command="{Binding SelectPhoto}" FontSize="8" BorderBrush="DarkGray" Background="DarkGray" Grid.Column="3" Grid.Row="3" MaxWidth="210" VerticalAlignment="Bottom" />
+
+            <Label Content="Currency" FontSize="11" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+            <ComboBox ItemsSource="{Binding Source={classes:EnumBindingSource {x:Type helpers:CurrencyEnum}}}" Grid.Row="4" Grid.Column="1" SelectedItem="{Binding DefaultCurrency}" VerticalAlignment="Bottom"/>
+
+            <Label Content="Gender" FontSize="11" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+            <ComboBox ItemsSource="{Binding Source={classes:EnumBindingSource {x:Type helpers:Gender}}}" Grid.Row="4" Grid.Column="3" SelectedItem="{Binding Gender}" VerticalAlignment="Bottom"/>
+
+            <Label Content="Password" Grid.Row="5" Grid.Column="0" FontSize="11" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+            <TextBox Text="{Binding Password}" MaxLength="50" Grid.Row="5" Grid.Column="1" materialDesign:HintAssist.Hint="Name" Grid.ColumnSpan="3" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Foreground="Black" FontFamily="Champagne &amp; Limousines" VerticalAlignment="Bottom"/>
+
+            <Button Content="Save" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="4" Command="{Binding Save}" VerticalAlignment="Bottom" Style="{StaticResource MaterialDesignOutlinedButton}" FontSize="18" />
+        </Grid>
+        <StackPanel Grid.Row="0" Grid.Column="1" Background="LightBlue">
+            <Button Content="Back" Command="{Binding BackToHome}" Background="Blue"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

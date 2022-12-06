@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="MoneyManager.View.AddView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MoneyManager.View"
+             xmlns:viewmodel="clr-namespace:MoneyManager.ViewModel"
+             xmlns:classes="clr-namespace:MoneyManager.Classes"
+             xmlns:helpers="clr-namespace:MoneyManager.Helpers"
+             mc:Ignorable="d"  
+             d:DataContext="{d:DesignInstance Type=viewmodel:EditViewModel}"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"     
+             d:DesignHeight="480" d:DesignWidth="640">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TabControl Style="{StaticResource MaterialDesignNavigatilRailTabControl}" Grid.Column="0">
+
+            <TabItem Style="{StaticResource MaterialDesignNavigationRailTabItem}" Header="Card">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="4*"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition Height="4*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions> 
+
+                    <Label Grid.Column="0" Grid.Row="1" Content="Expiration Years" Style="{StaticResource MaterialDesignLabel}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Label Grid.Column="0" Grid.Row="2" Content="Start Balance" Style="{StaticResource MaterialDesignLabel}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Label Grid.Column="0" Grid.Row="3" Content="Company" Style="{StaticResource MaterialDesignLabel}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                    <Slider Ticks="1, 2, 3, 4, 5" IsSnapToTickEnabled="True" TickPlacement="BottomRight" SmallChange="1" Minimum="1" Maximum="5" Grid.Column="1" Grid.Row="1" Margin="10,0,10,0" Value="{Binding CardLiveLong}"/>
+                    <TextBox  Grid.Column="1" Grid.Row="2" Style="{StaticResource MaterialDesignFloatingHintTextBox}" MaxLength="15" Text="{Binding SstartBalance}"/>
+                    <ComboBox ItemsSource="{Binding Source={classes:EnumBindingSource {x:Type helpers:CardCompanyEnum}}}" SelectedItem="{Binding Company}"  Grid.Column="1" Grid.Row="3"/>
+
+                    <Button Style="{StaticResource MaterialDesignOutlinedButton}" Command="{Binding AddCard}" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="3" Content="Add" FontSize="18"/>
+
+                </Grid>
+            </TabItem>
+
+            <TabItem Style="{StaticResource MaterialDesignNavigationRailTabItem}" Header="Category">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="4*"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition Height="4*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Label Grid.Column="0" Grid.Row="2" Content="Name" Style="{StaticResource MaterialDesignLabel}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Label Grid.Column="0" Grid.Row="3" Content="Type" Style="{StaticResource MaterialDesignLabel}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+  
+                    <TextBox Grid.Column="1" Grid.Row="2" Style="{StaticResource MaterialDesignFloatingHintTextBox}" MaxLength="40" Text="{Binding CategoryName}"/>
+                    <ComboBox ItemsSource="{Binding CategoryTypes}" SelectedItem="{Binding SelectedType}"  Grid.Column="1" Grid.Row="3"/>
+
+                    <Button Style="{StaticResource MaterialDesignOutlinedButton}" Command="{Binding AddCategory}" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="3" Content="Add" FontSize="18"/>
+
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <StackPanel Grid.Column="1" Background="LightBlue">
+            <Button Content="Back" Command="{Binding BackToHome}" Background="Blue"/> 
+        </StackPanel>
+    </Grid>
+</UserControl>
